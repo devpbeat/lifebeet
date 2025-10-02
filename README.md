@@ -23,7 +23,7 @@ Lifebeet is a Next.js 15 + Supabase app with Prisma ORM for multi-tenant finance
 - **ORM**: Prisma
 - **Authentication**: Supabase Auth
 - **UI**: Tailwind CSS + DaisyUI
-- **Deployment**: Vercel (recommended)
+- **Deployment**: Docker + GitHub Packages
 
 ## Quick Start
 
@@ -111,6 +111,37 @@ npx prisma db push
 # Seed database
 npx prisma db seed
 ```
+
+## Deployment
+
+### Docker (Recommended)
+
+The application is containerized and published to GitHub Container Registry.
+
+```bash
+# Pull the latest image
+docker pull ghcr.io/devpbeat/lifebeet:latest
+
+# Run with Docker
+docker run -d \
+  --name lifebeet \
+  -p 3000:3000 \
+  --env-file .env \
+  ghcr.io/devpbeat/lifebeet:latest
+
+# Or use Docker Compose
+docker-compose -f docker-compose.prod.yml up -d
+```
+
+See [DOCKER_DEPLOYMENT.md](./DOCKER_DEPLOYMENT.md) for complete deployment instructions including:
+- GitHub Container Registry setup
+- Portainer deployment
+- Reverse proxy configuration
+- Monitoring and troubleshooting
+
+### CI/CD
+
+GitHub Actions automatically builds and pushes Docker images to GHCR on every push to main.
 
 ## Contributing
 

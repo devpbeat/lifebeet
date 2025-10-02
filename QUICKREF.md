@@ -24,6 +24,40 @@ npm run build          # Build for production
 npm start              # Start production server
 ```
 
+## 🐳 Docker Commands
+
+```bash
+# Pull latest image from GitHub Container Registry
+docker pull ghcr.io/devpbeat/lifebeet:latest
+
+# Run with Docker
+docker run -d \
+  --name lifebeet \
+  -p 3000:3000 \
+  --env-file .env \
+  --restart unless-stopped \
+  ghcr.io/devpbeat/lifebeet:latest
+
+# Run with Docker Compose (production)
+docker-compose -f docker-compose.prod.yml up -d
+
+# Build local image
+docker build -t lifebeet .
+
+# View logs
+docker logs -f lifebeet
+
+# Stop container
+docker stop lifebeet
+
+# Remove container
+docker rm lifebeet
+
+# Execute commands in container
+docker exec lifebeet npx prisma db push
+docker exec lifebeet npx prisma db seed
+```
+
 ## 📁 Project Structure
 
 ```
